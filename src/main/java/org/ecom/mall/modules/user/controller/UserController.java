@@ -16,7 +16,8 @@ public class UserController {
     // 查询所有
     @GetMapping("/list")
     public List<User> list() {
-        return userService.list();
+        throw new RuntimeException("test");
+//        return userService.list();
     }
 
     // 新增

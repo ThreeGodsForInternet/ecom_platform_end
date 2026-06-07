@@ -1,8 +1,18 @@
-spring.application.name : mall
+spring.application.name: mall
 spring:
-datasource:
-driver-class-name: com.mysql.cj.jdbc.Driver
-url: jdbc:mysql://localhost:3306/ecom_mail
-username: root
-password: 6582352
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ecom_mail
+    username: root
+    password: 6582352
+  # flyway 数据表历史版本管理
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    encoding: UTF-8
+    baseline-on-migrate: true
 
+# mybatis-plus 日志（可选）
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

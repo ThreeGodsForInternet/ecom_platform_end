@@ -15,8 +15,14 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     implements UserService{
 
+// 快捷设置
+    @Override
+    public User findByUsername(String username) {
+        return baseMapper.selectByUsername(username);
+    }
+
+    @Override
+    public User findByPhone(String phone) {
+        return baseMapper.selectByPhone(phone);
+    }
 }
-
-
-
-

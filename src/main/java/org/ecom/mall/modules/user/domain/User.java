@@ -3,6 +3,7 @@ package org.ecom.mall.modules.user.domain;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import lombok.Data;
 
@@ -37,7 +38,13 @@ public class User {
     /**
      * 密码
      */
+    @JsonIgnore
     private String password;
+
+    /**
+     * 角色 ROLE_USER / ROLE_ADMIN
+     */
+    private String role;
 
     /**
      * 昵称
@@ -141,10 +148,4 @@ public class User {
         return sb.toString();
     }
 
-    public void setName(String 张三) {
-    }
-
-    public void setAge(int i) {
-
-    }
 }

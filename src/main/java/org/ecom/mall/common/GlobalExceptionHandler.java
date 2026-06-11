@@ -3,6 +3,10 @@ package org.ecom.mall.common;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -33,6 +37,40 @@ public class GlobalExceptionHandler {
     public Result<?> handleRuntimeException(RuntimeException e) {
         log.error("运行时异常: ", e);
         return Result.error(e.getMessage());
+    }
+
+    // ==================== Spring Security 异常 ====================
+
+    /** 用户不存在 */
+    @ExceptionHandler(UsernameNotFoundException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public Result<?> handleUsernameNotFound(UsernameNotFoundException e) {
+        log.warn("用户不存在: {}", e.getMessage());
+        return Result.error(401, e.getMessage());
+    }
+
+    /** 密码错误 */
+    @ExceptionHandler(BadCredentialsException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public Result<?> handleBadCredentials(BadCredentialsException e) {
+        log.warn("密码错误");
+        return Result.error(401, "用户名或密码错误");
+    }
+
+    /** 认证异常 */
+    @ExceptionHandler(AuthenticationException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public Result<?> handleAuthentication(AuthenticationException e) {
+        log.warn("认证失败: {}", e.getMessage());
+        return Result.error(401, e.getMessage());
+    }
+
+    /** 权限不足 */
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public Result<?> handleAccessDenied(AccessDeniedException e) {
+        log.warn("权限不足: {}", e.getMessage());
+        return Result.error(403, "权限不足");
     }
 
     // ==================== SpringMVC 内置异常 ====================

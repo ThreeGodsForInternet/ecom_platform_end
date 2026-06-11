@@ -12,6 +12,11 @@ spring:
     encoding: UTF-8
     baseline-on-migrate: true
 
+# JWT 配置
+jwt:
+  secret: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  # 生产环境请使用足够长的随机字符串
+  expiration: 86400000  # Token 过期时间，单位毫秒，默认24小时
+
 # mybatis-plus 日志（可选）
 mybatis-plus:
   configuration:

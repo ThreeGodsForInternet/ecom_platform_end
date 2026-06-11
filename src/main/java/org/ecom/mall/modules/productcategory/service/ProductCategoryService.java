@@ -2,12 +2,11 @@ package org.ecom.mall.modules.productcategory.service;
 
 import org.ecom.mall.modules.productcategory.domain.ProductCategory;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.ecom.mall.modules.productcategory.dto.ProductCategoryVO;
 
-/**
- * @author sls-0
- * @description 针对表【product_category(分类表)】的数据库操作Service
- * @createDate 2026-06-08
- */
+import java.util.List;
+
 public interface ProductCategoryService extends IService<ProductCategory> {
 
+    List<ProductCategoryVO> getTree();
 }

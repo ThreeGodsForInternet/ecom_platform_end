@@ -10,4 +10,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface ProductDetailService extends IService<ProductDetail> {
 
+    ProductDetail getByProductId(Long productId);
 }

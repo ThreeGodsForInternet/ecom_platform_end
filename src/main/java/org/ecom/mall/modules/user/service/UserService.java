@@ -1,6 +1,7 @@
 package org.ecom.mall.modules.user.service;
 
 import org.ecom.mall.modules.user.domain.User;
+import org.ecom.mall.modules.user.dto.UserUpdateRequest;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -13,4 +14,6 @@ public interface UserService extends IService<User> {
     User findByUsername(String username);
 
     User findByPhone(String phone);
+
+    void updateProfile(UserUpdateRequest request);
 }
